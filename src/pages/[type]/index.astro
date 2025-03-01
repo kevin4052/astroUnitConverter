@@ -1,6 +1,7 @@
 ---
-import unitData from "../../data/unitData.ts";
-import Layout from "../../layouts/Layout.astro";
+import Card from "@components/Card.astro";
+import unitData from "@data/unitData.ts";
+import Layout from "@layouts/Layout.astro";
 
 export function getStaticPaths() {
   return [
@@ -11,8 +12,12 @@ export function getStaticPaths() {
 }
 
 const unitType = Astro.params.type;
+const data = unitData[unitType];
+const title = unitType.charAt(0).toUpperCase() + unitType.slice(1);
 ---
 
 <Layout>
-  {unitType}
+  <Card title={title} unitTypeList={Object.keys(data)} />
 </Layout>
+
+<script src="@scripts/common.ts"></script>
