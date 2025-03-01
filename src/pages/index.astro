@@ -16,40 +16,30 @@ import Layout from "../layouts/Layout.astro";
                         <select
                             name="unitType"
                             id="unitType"
-                            class="form-control"
-                        >
-                            <option value="length">Length</option>
-                            <option value="mass">Mass</option>
-                            <option value="temperature">Temperature</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="convertions">Convertion</label>
-                        <select
-                            name="convertions"
-                            id="convertions"
-                            class="form-control"
-                        >
-                            <option value="inch-mm"
-                                >Inches to Millimeters</option
-                            >
-                            <option value="mm-inch"
-                                >Millimeters to Inches</option
-                            >
-                        </select>
+                            class="form-control"></select>
                     </div>
                     <div class="form-group">
                         <label for="input">From</label>
-                        <input type="text" id="input" class="form-control" />
+                        <div>
+                            <input
+                                type="text"
+                                id="input"
+                                class="form-control"
+                            />
+                            <select id="selectFrom"></select>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="output">To</label>
-                        <input
-                            type="text"
-                            id="output"
-                            readonly
-                            class="form-control"
-                        />
+                        <div>
+                            <input
+                                type="text"
+                                id="output"
+                                readonly
+                                class="form-control"
+                            />
+                            <select id="selectTo"></select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,78 +80,4 @@ import Layout from "../layouts/Layout.astro";
     }
 </style>
 
-<script>
-    const input = document.getElementById("input") as HTMLInputElement;
-    const convertionSelect = document.getElementById(
-        "convertions"
-    ) as HTMLSelectElement;
-    const unitTypeSelect = document.getElementById(
-        "unitType"
-    ) as HTMLSelectElement;
-
-    type Conversion = {
-        [key: string]: (value: number) => number;
-    };
-    type UnitConvertions = {
-        [key: string]: Conversion;
-    };
-    const unitConvertions: UnitConvertions = {
-        length: {
-            "inch-mm": (value: number): number => value * 25.4,
-            "mm-inch": (value: number): number => value / 25.4,
-        },
-        mass: {
-            "kg-lb": (value: number): number => value * 2.20462,
-            "lb-kg": (value: number): number => value / 2.20462,
-        },
-        temperature: {
-            "c-f": (value: number): number => value * 1.8 + 32,
-            "f-c": (value: number): number => (value - 32) / 1.8,
-        },
-    };
-    const unitTypeList = ["length", "mass", "temperature"];
-
-    const getUnitType = (): string => {
-        const unitTypeSelect = document.getElementById(
-            "unitType"
-        ) as HTMLSelectElement;
-        return unitTypeSelect.value;
-    };
-    const cal = () => {
-        const input = document.getElementById("input") as HTMLInputElement;
-        const output = document.getElementById("output") as HTMLInputElement;
-        const unitType = getUnitType();
-        const inputValue = input.value;
-        const selectedConvertion = convertionSelect.value;
-        const convertion =
-            unitConvertions[unitType][
-                selectedConvertion as keyof typeof unitConvertions
-            ];
-
-        if (inputValue === "" || !Number(inputValue)) {
-            output.value = "";
-            return;
-        }
-        output.value = convertion(Number(inputValue)).toString();
-    };
-
-    const populateConvertions = () => {
-        const selectedUnitType = unitTypeSelect.value;
-        const convertions = unitConvertions[selectedUnitType];
-        convertionSelect.innerHTML = "";
-        for (const key in convertions) {
-            const option = document.createElement("option");
-            option.value = key;
-            option.textContent = key;
-            convertionSelect.appendChild(option);
-        }
-    };
-
-    convertionSelect.addEventListener("change", () => cal());
-    input.addEventListener("keyup", () => cal());
-    unitTypeSelect.addEventListener("change", () => {
-        populateConvertions();
-        cal();
-    });
-    populateConvertions();
-</script>
+<script src="../scripts/common.ts"></script>
