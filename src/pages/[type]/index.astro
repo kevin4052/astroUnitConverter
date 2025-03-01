@@ -1,0 +1,18 @@
+---
+import unitData from "../../data/unitData.ts";
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { type: "length" } },
+    { params: { type: "mass" } },
+    { params: { type: "time" } },
+  ];
+}
+
+const unitType = Astro.params.type;
+---
+
+<Layout>
+  {unitType}
+</Layout>

@@ -1,10 +1,10 @@
-import unitData from "../data/unitData.ts"
+import unitData from "@data/unitData.ts"
 const input = document.getElementById("input") as HTMLInputElement;
 const unitTypeSelect = document.getElementById("unitType") as HTMLSelectElement;
+const selectTo = document.getElementById("selectTo") as HTMLSelectElement;
 const selectFrom = document.getElementById(
         "selectFrom"
     ) as HTMLSelectElement;
-const selectTo = document.getElementById("selectTo") as HTMLSelectElement;
 
 const getSelectedUnitTypeValue = (): string => {
     const unitTypeSelect = document.getElementById(
