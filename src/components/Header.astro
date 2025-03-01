@@ -1,0 +1,43 @@
+---
+interface Props {
+  title: string;
+  unitTypeList: string[];
+}
+
+const { title, unitTypeList }: Props = Astro.props;
+---
+
+<nav>
+  <a href="/">Home</a>
+  {
+    unitTypeList.map((unitType) => (
+      <a href={`/${unitType.toLowerCase()}`}>{unitType}</a>
+    ))
+  }
+</nav>
+
+<style>
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    height: 70px;
+    background-color: deepskyblue;
+    align-items: center;
+  }
+
+  a {
+    text-decoration: none;
+    color: #222831;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f2a365;
+  }
+
+  a:hover {
+    background-color: #f28b82;
+  }
+</style>

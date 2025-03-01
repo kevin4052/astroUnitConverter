@@ -1,27 +1,31 @@
 ---
+import Header from "@components/Header.astro";
+import unitData from "@data/unitData.ts";
+
 const backgroundColor = "#222831";
+const unitTypeList = Object.keys(unitData);
 ---
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="generator" content={Astro.generator} />
-        <title>Unit Converter</title>
-    </head>
-    <body>
-        <slot />
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Unit Converter</title>
+  </head>
+  <body>
+    <Header title="Unit Converter" unitTypeList={unitTypeList} />
+    <slot />
+  </body>
 </html>
 
-<style define:vars={{ backgroundColor }}>
-    html,
-    body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        /* background-color: var(--background-color); */
-    }
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>

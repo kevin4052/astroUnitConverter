@@ -1,5 +1,5 @@
 ---
-import Card from "@components/Card.astro";
+import Card from "@components/SingleConvertionSection.astro";
 import unitData from "@data/unitData.ts";
 import Layout from "@layouts/Layout.astro";
 
@@ -17,7 +17,11 @@ const title = unitType.charAt(0).toUpperCase() + unitType.slice(1);
 ---
 
 <Layout>
-  <Card title={title} unitTypeList={Object.keys(data)} />
+  <Card
+    title={title}
+    unitTypeList={Object.keys(data)}
+    data-unitType={unitType}
+  />
 </Layout>
 
-<script src="@scripts/common.ts"></script>
+<script src="@scripts/singleType.ts"></script>
