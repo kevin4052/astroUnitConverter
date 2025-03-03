@@ -5,10 +5,14 @@ import Layout from "@layouts/Layout.astro";
 import { getStaticConversionPaths } from "@utils/generatePaths.ts";
 
 export function getStaticPaths() {
-  return getStaticConversionPaths(unitData);
+  return getStaticConversionPaths(unitData, "-");
 }
 
 const { type, conversion } = Astro.params;
+const [from, to] = conversion.split("-");
 ---
 
-<Layout> Hello, World! {type} - {conversion}</Layout>
+<Layout>
+  <div>{type}: From {from} to {to}</div>
+  <div><a href=`/${type}/${to}-${from}`>reverse</a></div>
+</Layout>

@@ -1,11 +1,11 @@
-export const getStaticConversionPaths = (data: UnitConvertions): ConversionPath[] => {
+export const getStaticConversionPaths = (data: UnitConvertions, delimiter: string = '-'): ConversionPath[] => {
     const paths: ConversionPath[] = [];
     for (const type in data) {
         const unitKeys = Object.keys(data[type]);
 
         for (let i = 0; i < unitKeys.length; i++) {
             for (let j = 0; j < unitKeys.length; j++) {
-                paths.push({ params: { type, conversion: `${unitKeys[i]}-to-${unitKeys[j]}` } });
+                paths.push({ params: { type, conversion: `${unitKeys[i]}${delimiter}${unitKeys[j]}` } });
             }
         }
     }

@@ -17,7 +17,9 @@ const unitTypeList = Object.keys(unitData);
   </head>
   <body>
     <Header title="Unit Converter" unitTypeList={unitTypeList} />
-    <slot />
+    <div class="container">
+      <slot />
+    </div>
   </body>
 </html>
 
@@ -27,5 +29,10 @@ const unitTypeList = Object.keys(unitData);
     margin: 0;
     width: 100%;
     height: 100%;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 </style>
