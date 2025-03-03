@@ -20,13 +20,17 @@ const getSelectTo = (): string => {
     return selectTo.value;
 };
 
+const getUnitType = (): string => {
+    const href = window.location.href.split("/");
+    return href[href.length - 1].toLowerCase() as string;
+};
+
 
 // calculate the conversion
 const cal = () => {
     const input = document.getElementById("input") as HTMLInputElement;
     const output = document.getElementById("output") as HTMLInputElement;
-    const title = document.getElementById("title") as HTMLElement;
-    const unitType = title.innerText.toLocaleLowerCase();
+    const unitType = getUnitType();
     const inputValue = input.value;
 
     const selectFrom = getSelectFrom();

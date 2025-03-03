@@ -2,13 +2,10 @@
 import Card from "@components/SingleConvertionSection.astro";
 import unitData from "@data/unitData.ts";
 import Layout from "@layouts/Layout.astro";
+import { getStaticTypePaths } from "@utils/generatePaths.ts";
 
 export function getStaticPaths() {
-  return [
-    { params: { type: "length" } },
-    { params: { type: "mass" } },
-    { params: { type: "time" } },
-  ];
+  return getStaticTypePaths(unitData);
 }
 
 const unitType = Astro.params.type;
