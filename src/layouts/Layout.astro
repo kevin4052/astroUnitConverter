@@ -8,31 +8,55 @@ const unitTypeList = Object.keys(unitData);
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Unit Converter</title>
-  </head>
-  <body>
-    <Header title="Unit Converter" unitTypeList={unitTypeList} />
-    <div class="container">
-      <slot />
-    </div>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Unit Converter</title>
+	</head>
+	<body>
+		<Header title="Unit Converter" unitTypeList={unitTypeList} />
+		<div class="container">
+			<slot />
+		</div>
+	</body>
 </html>
 
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+<style is:global>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+	.container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.card {
+		width: 400px;
+		padding: 20px;
+		border-radius: 10px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+	.card-body {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.form-group {
+		margin-bottom: 20px;
+	}
+
+	.form-control {
+		width: -webkit-fill-available;
+		padding: 10px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+	}
 </style>
