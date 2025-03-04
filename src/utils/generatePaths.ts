@@ -1,4 +1,4 @@
-export const getStaticConversionPaths = (data: UnitConvertions, delimiter: string = '-'): ConversionPath[] => {
+export const getStaticConversionPaths = (data: UnitConversions, delimiter: string = '-'): ConversionPath[] => {
     const paths: ConversionPath[] = [];
     for (const type in data) {
         const unitKeys = Object.keys(data[type]);
@@ -12,7 +12,7 @@ export const getStaticConversionPaths = (data: UnitConvertions, delimiter: strin
     return paths;
 };
 
-export const getStaticTypePaths = (data: UnitConvertions): StaticPath[] => {
+export const getStaticTypePaths = (data: UnitConversions): StaticPath[] => {
     const types = Object.keys(data);
     return types.map((type) => ({ params: { type } }));
 

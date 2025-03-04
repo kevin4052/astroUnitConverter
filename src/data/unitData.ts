@@ -1,4 +1,4 @@
-const unitConvertions: UnitConversions = {
+const data: UnitConversions = {
     length: {
         meter: ["m", 1],
         centimeter: ["cm", 0.01],
@@ -30,4 +30,4 @@ const unitConvertions: UnitConversions = {
     }
 };
 
-export default unitConvertions;
+export default data;

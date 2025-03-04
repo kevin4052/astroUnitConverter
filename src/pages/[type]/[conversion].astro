@@ -1,52 +1,51 @@
 ---
-import unitData from "@data/unitData.ts";
+import data from "@data/unitData.ts";
 import Layout from "@layouts/Layout.astro";
 import { getStaticConversionPaths } from "@utils/generatePaths.ts";
 
 export function getStaticPaths() {
-    return getStaticConversionPaths(unitData, "-");
+  return getStaticConversionPaths(data, "-");
 }
 
 const { type, conversion } = Astro.params;
 const [from, to] = conversion.split("-");
-const fromInfo = unitData[type][from];
-const toInfo = unitData[type][to];
+const fromInfo = data[type][from];
+const toInfo = data[type][to];
 const title = type.charAt(0).toUpperCase() + type.slice(1);
 ---
 
 <Layout>
-    <div>{type}: From {from} to {to}</div>
-    <div><a href=`/${type}/${to}-${from}`>reverse</a></div>
-    <section>
-        <div class="container">
-            <h2 id="title">{title} Converter</h2>
-            <div class="card">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="input">From</label>
-                        <div>
-                            <input
-                                type="text"
-                                id="input"
-                                class="form-control"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="output">To</label>
-                            <div>
-                                <input
-                                    type="text"
-                                    id="output"
-                                    readonly
-                                    class="form-control"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <section>
+    <h2 id="title">{title} Converter</h2>
+    <div class="card">
+      <div class="card-body">
+        <div class="form-group">
+          <label for="input">From {from}</label>
+          <div>
+            <input type="text" id="input" class="form-control" />
+          </div>
+          <div id="reverse">
+            <a href=`/${type}/${to}-${from}`>reverse</a>
+          </div>
+          <div class="form-group">
+            <label for="output">To {to}</label>
+            <div>
+              <input type="text" id="output" readonly class="form-control" />
             </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  #reverse {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+</style>
 
 <script src="@scripts/type/singleConversion.ts"></script>
