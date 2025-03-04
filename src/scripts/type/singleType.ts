@@ -1,4 +1,23 @@
 import unitData from "@data/unitData.ts"
+import { getSelectValueById, getInputElementValueById, getUnitConversion, getPathNameInfo } from "@utils/helpers";
+
+// calculate the conversion
+const cal = () => {
+    const output = document.getElementById("output") as HTMLInputElement;
+    const inputValue = getInputElementValueById("input");
+    const unitType = getPathNameInfo().unitType;
+    const selectFrom = getSelectValueById("selectFrom");
+    const selectTo = getSelectValueById("selectTo");
+
+    if (inputValue === "" || !Number(inputValue)) {
+        output.value = "";
+        return;
+    }
+
+    const fromConvertion = getUnitConversion(unitData, unitType, selectFrom);
+    const toConvertion = getUnitConversion(unitData, unitType, selectTo);
+    output.value = (Number(inputValue) * (fromConvertion / toConvertion)).toString();
+};
 
 // get elements from the DOM
 const input = document.getElementById("input") as HTMLInputElement;
@@ -6,52 +25,6 @@ const selectTo = document.getElementById("selectTo") as HTMLSelectElement;
 const selectFrom = document.getElementById(
         "selectFrom"
     ) as HTMLSelectElement;
-
-// get selected unit type value
-const getSelectFrom = (): string => {
-    const selectFrom = document.getElementById(
-        "selectFrom"
-    ) as HTMLSelectElement;
-    return selectFrom.value;
-};
-
-const getSelectTo = (): string => {
-    const selectTo = document.getElementById("selectTo") as HTMLSelectElement;
-    return selectTo.value;
-};
-
-const getUnitType = (): string => {
-    const href = window.location.href.split("/");
-    return href[href.length - 1].toLowerCase() as string;
-};
-
-
-// calculate the conversion
-const cal = () => {
-    const input = document.getElementById("input") as HTMLInputElement;
-    const output = document.getElementById("output") as HTMLInputElement;
-    const unitType = getUnitType();
-    const inputValue = input.value;
-
-    const selectFrom = getSelectFrom();
-    const selectTo = getSelectTo();
-
-    if (inputValue === "" || !Number(inputValue)) {
-        output.value = "";
-        return;
-    }
-
-    const fromConvertion =
-        unitData[unitType][
-            selectFrom as keyof typeof unitData
-        ];
-    const toConvertion =
-        unitData[unitType][
-            selectTo as keyof typeof unitData
-        ];
-
-    output.value = (Number(inputValue) * (fromConvertion[1] / toConvertion[1])).toString();
-};
 
 // Event listeners
 input.addEventListener("keyup", () => cal());

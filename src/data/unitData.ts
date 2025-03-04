@@ -1,4 +1,4 @@
-const unitConvertions: UnitConvertions = {
+const unitConvertions: UnitConversions = {
     length: {
         meter: ["m", 1],
         centimeter: ["cm", 0.01],

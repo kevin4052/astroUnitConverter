@@ -2,7 +2,7 @@ type UnitConversion = {
     [key: string]: [string, number];
 };
 
-type UnitConvertions = {
+type UnitConversions = {
     [key: string]: UnitConversion;
 };
 
@@ -17,4 +17,10 @@ type StaticPath = {
     [key: string]: {
         type: string;
     };
+}
+
+type PathNameInfo = {
+    unitType: string;
+    fromUnit: string;
+    toUnit: string;
 }

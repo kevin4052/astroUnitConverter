@@ -1,58 +1,25 @@
 import unitData from "@data/unitData.ts"
-const input = document.getElementById("input") as HTMLInputElement;
-const unitTypeSelect = document.getElementById("unitType") as HTMLSelectElement;
-const selectTo = document.getElementById("selectTo") as HTMLSelectElement;
-const selectFrom = document.getElementById(
-        "selectFrom"
-    ) as HTMLSelectElement;
-
-const getSelectedUnitTypeValue = (): string => {
-    const unitTypeSelect = document.getElementById(
-        "unitType"
-    ) as HTMLSelectElement;
-    return unitTypeSelect.value;
-};
-
-const getSelectFrom = (): string => {
-    const selectFrom = document.getElementById(
-        "selectFrom"
-    ) as HTMLSelectElement;
-    return selectFrom.value;
-};
-
-const getSelectTo = (): string => {
-    const selectTo = document.getElementById("selectTo") as HTMLSelectElement;
-    return selectTo.value;
-};
+import { getSelectValueById, getInputElementValueById, getUnitConversion } from "@utils/helpers";
 
 const cal = () => {
-    const input = document.getElementById("input") as HTMLInputElement;
     const output = document.getElementById("output") as HTMLInputElement;
-    const unitType = getSelectedUnitTypeValue();
-    const inputValue = input.value;
-
-    const selectFrom = getSelectFrom();
-    const selectTo = getSelectTo();
+    const unitType = getSelectValueById("unitType");
+    const inputValue = getInputElementValueById("input");
+    const selectFromValue = getSelectValueById("selectFrom");
+    const selectToValue = getSelectValueById("selectTo");
 
     if (inputValue === "" || !Number(inputValue)) {
         output.value = "";
         return;
     }
 
-    const fromConvertion =
-        unitData[unitType][
-            selectFrom as keyof typeof unitData
-        ];
-    const toConvertion =
-        unitData[unitType][
-            selectTo as keyof typeof unitData
-        ];
-
-    output.value = (Number(inputValue) * (fromConvertion[1] / toConvertion[1])).toString();
+    const fromConvertion = getUnitConversion(unitData, unitType, selectFromValue);
+    const toConvertion = getUnitConversion(unitData, unitType, selectToValue);
+    output.value = (Number(inputValue) * (fromConvertion / toConvertion)).toString();
 };
 
 const populateConvertions = () => {
-    const selectedUnitType = getSelectedUnitTypeValue();
+    const selectedUnitType = getSelectValueById("unitType");
     const selectFrom = document.getElementById(
         "selectFrom"
     ) as HTMLSelectElement;
@@ -68,6 +35,14 @@ const populateConvertions = () => {
         selectTo.appendChild(option.cloneNode(true));
     }
 };
+
+// Event listeners
+const input = document.getElementById("input") as HTMLInputElement;
+const unitTypeSelect = document.getElementById("unitType") as HTMLSelectElement;
+const selectTo = document.getElementById("selectTo") as HTMLSelectElement;
+const selectFrom = document.getElementById(
+        "selectFrom"
+    ) as HTMLSelectElement;
 
 // Event listeners
 input.addEventListener("keyup", () => cal());
