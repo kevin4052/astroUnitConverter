@@ -37,7 +37,13 @@ export const getPathNameInfo = (): PathNameInfo => {
 	path.fromUnit = units[0].toLowerCase();
 	path.toUnit = units[1].toLowerCase();
 
-	const searchParams = window.location.search.slice(1).split("&");
+	const searchParams = window.location.search
+		.slice(1)
+		.split("&")
+		.filter(
+			(item) =>
+				item !== "" && (item.includes("fv=") || item.includes("tv="))
+		);
 	if (searchParams.length === 0) {
 		return path;
 	}
