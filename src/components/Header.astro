@@ -1,42 +1,77 @@
 ---
+import theme from "@styles/themeColors.ts";
 interface Props {
 	title: string;
 	unitTypeList: string[];
 }
 
 const { title, unitTypeList }: Props = Astro.props;
+const { primary, secondary, info, background } = theme;
 ---
 
 <nav>
-	<a href="/">Home</a>
-	{
-		unitTypeList.map((unitType) => (
-			<a href={`/${unitType.toLowerCase()}`}>{unitType}</a>
-		))
-	}
+	<div class="container">
+		<div id="title">
+			<a href="/">{title}</a>
+		</div>
+		<div id="links">
+			{
+				unitTypeList.map((unitType) => (
+					<a href={`/${unitType.toLowerCase()}`}>{unitType}</a>
+				))
+			}
+		</div>
+	</div>
 </nav>
 
-<style>
+<style define:vars={{ primary, secondary, background, info }}>
 	nav {
 		display: flex;
-		flex-direction: row;
 		justify-content: center;
-		gap: 10px;
-		margin-bottom: 20px;
-		background-color: deepskyblue;
 		align-items: center;
-		padding: 0.5rem 0;
+		background-color: var(--primary);
 	}
-
-	a {
+	.container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		gap: 10px;
+		padding: 0.5rem;
+		width: 1400px;
+	}
+	#links a {
 		text-decoration: none;
 		color: #222831;
-		padding: 10px;
+		padding: 5px 10px;
 		border-radius: 5px;
-		background-color: #f2a365;
+		background-color: var(--secondary);
+	}
+	#links a:hover {
+		background-color: var(--info);
+	}
+	#title {
+		font-size: 2rem;
+		font-weight: bold;
+		color: white;
+	}
+	#title a {
+		text-decoration: none;
+		color: white;
+	}
+	#links {
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
 	}
 
-	a:hover {
-		background-color: #f28b82;
+	@media (max-width: 480px) {
+		nav {
+			padding: 0.5rem;
+		}
+
+		#title {
+			font-size: 1.3rem;
+		}
 	}
 </style>

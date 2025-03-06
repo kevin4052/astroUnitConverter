@@ -1,30 +1,36 @@
-import unitData from "@data/unitData.ts"
-import { getSelectValueById, getInputElementValueById, getUnitConversion, getPathNameInfo } from "@utils/helpers";
+import unitData from "@data/unitData.ts";
+import {
+	getSelectValueById,
+	getInputElementValueById,
+	getUnitConversion,
+	getPathNameInfo,
+} from "@utils/helpers";
 
 // calculate the conversion
 const cal = () => {
-    const output = document.getElementById("output") as HTMLInputElement;
-    const inputValue = getInputElementValueById("input");
-    const unitType = getPathNameInfo().unitType;
-    const selectFrom = getSelectValueById("selectFrom");
-    const selectTo = getSelectValueById("selectTo");
+	const output = document.getElementById("output") as HTMLInputElement;
+	const inputValue = getInputElementValueById("input");
+	const unitType = getPathNameInfo().unitType;
+	const selectFrom = getSelectValueById("selectFrom");
+	const selectTo = getSelectValueById("selectTo");
 
-    if (inputValue === "" || !Number(inputValue)) {
-        output.value = "";
-        return;
-    }
+	if (inputValue === "" || !Number(inputValue)) {
+		output.value = "";
+		return;
+	}
 
-    const fromConvertion = getUnitConversion(unitData, unitType, selectFrom);
-    const toConvertion = getUnitConversion(unitData, unitType, selectTo);
-    output.value = (Number(inputValue) * (fromConvertion / toConvertion)).toString();
+	const fromConvertion = getUnitConversion(unitData, unitType, selectFrom);
+	const toConvertion = getUnitConversion(unitData, unitType, selectTo);
+	output.value = (
+		Number(inputValue) *
+		(fromConvertion[1] / toConvertion[1])
+	).toString();
 };
 
 // get elements from the DOM
 const input = document.getElementById("input") as HTMLInputElement;
 const selectTo = document.getElementById("selectTo") as HTMLSelectElement;
-const selectFrom = document.getElementById(
-        "selectFrom"
-    ) as HTMLSelectElement;
+const selectFrom = document.getElementById("selectFrom") as HTMLSelectElement;
 
 // Event listeners
 input.addEventListener("keyup", () => cal());

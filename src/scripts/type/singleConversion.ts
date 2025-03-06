@@ -20,7 +20,7 @@ const cal = () => {
 	const toConvertion = getUnitConversion(unitData, unitType, toUnit);
 	output.value = (
 		Number(inputValue) *
-		(fromConvertion / toConvertion)
+		(fromConvertion[1] / toConvertion[1])
 	).toString();
 };
 

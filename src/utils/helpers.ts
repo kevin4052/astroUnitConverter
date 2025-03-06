@@ -12,8 +12,8 @@ export const getUnitConversion = (
 	data: UnitConversions,
 	type: string,
 	key: string
-): number => {
-	return data[type][key as keyof typeof data][1];
+): [string, number] => {
+	return data[type][key as keyof typeof data];
 };
 
 export const getPathNameInfo = (): PathNameInfo => {

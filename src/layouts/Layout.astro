@@ -1,8 +1,9 @@
 ---
 import Header from "@components/Header.astro";
 import unitData from "@data/unitData.ts";
+import theme from "@styles/themeColors.ts";
 
-const backgroundColor = "#222831";
+const { primary, secondary, background, info } = theme;
 const unitTypeList = Object.keys(unitData);
 ---
 
@@ -23,7 +24,7 @@ const unitTypeList = Object.keys(unitData);
 	</body>
 </html>
 
-<style is:global>
+<style is:global define:vars={{ primary, secondary, background, info }}>
 	html,
 	body {
 		margin: 0px;
@@ -43,6 +44,7 @@ const unitTypeList = Object.keys(unitData);
 		padding: 20px;
 		border-radius: 10px;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		background-color: var(--background);
 	}
 
 	.card-body {
@@ -51,7 +53,10 @@ const unitTypeList = Object.keys(unitData);
 	}
 
 	.form-group {
-		margin-bottom: 20px;
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+		margin-bottom: 1rem;
 	}
 
 	.form-control {
@@ -59,6 +64,18 @@ const unitTypeList = Object.keys(unitData);
 		padding: 10px;
 		border: 1px solid #ccc;
 		border-radius: 5px;
+	}
+
+	.form-group p {
+		margin: 0;
+		color: var(--info);
+		font-size: 1.2rem;
+		font-weight: bold;
+	}
+
+	.form-control:focus {
+		outline: none;
+		border-color: var(--info);
 	}
 
 	@media (max-width: 480px) {
