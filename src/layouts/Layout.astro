@@ -26,7 +26,8 @@ const unitTypeList = Object.keys(unitData);
 <style is:global>
 	html,
 	body {
-		margin: 0;
+		margin: 0px;
+		padding: 0px;
 		width: 100%;
 		height: 100%;
 	}
@@ -58,5 +59,11 @@ const unitTypeList = Object.keys(unitData);
 		padding: 10px;
 		border: 1px solid #ccc;
 		border-radius: 5px;
+	}
+
+	@media (max-width: 480px) {
+		.card {
+			width: 100%;
+		}
 	}
 </style>
