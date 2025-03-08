@@ -1,8 +1,8 @@
 ---
 import theme from "@styles/themeColors.ts";
 interface Props {
-	title: string;
-	unitTypeList: string[];
+  title: string;
+  unitTypeList: string[];
 }
 
 const { title, unitTypeList }: Props = Astro.props;
@@ -10,68 +10,69 @@ const { primary, secondary, info, background } = theme;
 ---
 
 <nav>
-	<div class="container">
-		<div id="title">
-			<a href="/">{title}</a>
-		</div>
-		<div id="links">
-			{
-				unitTypeList.map((unitType) => (
-					<a href={`/${unitType.toLowerCase()}`}>{unitType}</a>
-				))
-			}
-		</div>
-	</div>
+  <div class="nav-content">
+    <div id="title">
+      <a href="/">{title}</a>
+    </div>
+    <div id="links">
+      {
+        unitTypeList.map((unitType) => (
+          <a href={`/${unitType.toLowerCase()}`}>{unitType}</a>
+        ))
+      }
+    </div>
+  </div>
 </nav>
 
 <style define:vars={{ primary, secondary, background, info }}>
-	nav {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background-color: var(--primary);
-	}
-	.container {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		gap: 10px;
-		padding: 0.5rem;
-		width: 1400px;
-	}
-	#links a {
-		text-decoration: none;
-		color: #222831;
-		padding: 5px 10px;
-		border-radius: 5px;
-		background-color: var(--secondary);
-	}
-	#links a:hover {
-		background-color: var(--info);
-	}
-	#title {
-		font-size: 2rem;
-		font-weight: bold;
-		color: white;
-	}
-	#title a {
-		text-decoration: none;
-		color: white;
-	}
-	#links {
-		display: flex;
-		flex-direction: row;
-		gap: 10px;
-	}
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    background-color: var(--primary);
+  }
+  .nav-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 0.5rem;
+    width: 1400px;
+  }
+  #links a {
+    text-decoration: none;
+    color: #222831;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: var(--secondary);
+  }
+  #links a:hover {
+    background-color: var(--info);
+  }
+  #title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+  }
+  #title a {
+    text-decoration: none;
+    color: white;
+  }
+  #links {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
 
-	@media (max-width: 480px) {
-		nav {
-			padding: 0.5rem;
-		}
+  @media (max-width: 480px) {
+    nav {
+      padding: 0.5rem;
+    }
 
-		#title {
-			font-size: 1.3rem;
-		}
-	}
+    #title {
+      font-size: 1.3rem;
+    }
+  }
 </style>

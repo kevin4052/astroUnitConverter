@@ -7,11 +7,11 @@ interface Props {
 const { title, unitTypeList }: Props = Astro.props;
 ---
 
-<section>
-  <div class="container">
-    <h2 id="title">{title}</h2>
-    <div class="card">
-      <div class="card-body">
+<div class="section">
+  <h2 id="title">{title}</h2>
+  <div class="card">
+    <div class="card-body">
+      <form>
         <div class="form-group">
           <label for="unitType">Unit Type</label>
           <select name="unitType" id="unitType" class="form-control">
@@ -38,9 +38,9 @@ const { title, unitTypeList }: Props = Astro.props;
           <label for="output">Result</label>
           <p id="output"></p>
         </div>
-      </div>
+      </form>
     </div>
   </div>
-</section>
+</div>
 
 <script src="@scripts/common.ts"></script>
