@@ -1,11 +1,11 @@
 ---
-import Card from "@components/SingleConvertionSection.astro";
+import TypeConversionCard from "@components/SingleTypeCard.astro";
 import unitData from "@data/unitData.ts";
 import Layout from "@layouts/Layout.astro";
 import { getStaticTypePaths } from "@utils/generatePaths.ts";
 
 export function getStaticPaths() {
-    return getStaticTypePaths(unitData);
+  return getStaticTypePaths(unitData);
 }
 
 const unitType = Astro.params.type;
@@ -14,11 +14,9 @@ const title = unitType.charAt(0).toUpperCase() + unitType.slice(1);
 ---
 
 <Layout>
-    <Card
-        title={title}
-        unitTypeList={Object.keys(data)}
-        data-unitType={unitType}
-    />
+  <TypeConversionCard
+    title={title}
+    unitTypeList={Object.keys(data)}
+    data-unitType={unitType}
+  />
 </Layout>
-
-<script src="@scripts/type/singleType.ts"></script>

@@ -8,23 +8,23 @@ import {
 
 // calculate the conversion
 const cal = () => {
-	const output = document.getElementById("output") as HTMLInputElement;
+	const output = document.getElementById("output") as HTMLParagraphElement;
 	const inputValue = getInputElementValueById("input");
 	const unitType = getPathNameInfo().unitType;
 	const selectFrom = getSelectValueById("selectFrom");
 	const selectTo = getSelectValueById("selectTo");
 
 	if (inputValue === "" || !Number(inputValue)) {
-		output.value = "";
+		output.innerText = "";
 		return;
 	}
 
 	const fromConvertion = getUnitConversion(unitData, unitType, selectFrom);
 	const toConvertion = getUnitConversion(unitData, unitType, selectTo);
-	output.value = (
+	output.innerText = `${(
 		Number(inputValue) *
 		(fromConvertion[1] / toConvertion[1])
-	).toString();
+	).toString()} ${toConvertion[0]}`;
 };
 
 // get elements from the DOM
