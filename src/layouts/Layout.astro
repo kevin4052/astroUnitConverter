@@ -1,5 +1,6 @@
 ---
 import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
 import unitData from "@data/unitData.ts";
 import theme from "@styles/themeColors.ts";
 
@@ -21,6 +22,7 @@ const unitTypeList = Object.keys(unitData);
     <div class="container">
       <slot />
     </div>
+    <Footer />
   </body>
 </html>
 
@@ -34,6 +36,7 @@ const unitTypeList = Object.keys(unitData);
   }
   .container {
     padding: 1rem;
+    min-height: 100vh;
   }
 
   .section {

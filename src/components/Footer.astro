@@ -1,0 +1,44 @@
+---
+import theme from "@styles/themeColors";
+
+const { primary, secondary, info, background } = theme;
+---
+
+<section id="footer">
+  <div id="footer-inner">
+    <div id="footer-nav">
+      <a href="#">about us</a> |
+      <a href="#">terms of use</a> |
+      <a href="#">privacy policy</a> |
+      <a href="#">site map</a>
+    </div>
+  </div>
+</section>
+
+<style define:vars={{ primary, secondary, background, info }}>
+  #footer {
+    background: var(--primary);
+    padding: 25px 0px;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  #footer a {
+    color: white;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  #footer-inner {
+    width: 990px;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    overflow: auto;
+  }
+
+  #footer-nav {
+    text-align: center;
+  }
+</style>
