@@ -3,12 +3,12 @@ import TypeConversionCard from "@components/SingleTypeCard.astro";
 import unitData from "@data/unitData.ts";
 import Layout from "@layouts/Layout.astro";
 import {
-  getStaticConversionPaths,
-  getStaticTypePaths,
+	getStaticConversionPaths,
+	getStaticTypePaths,
 } from "@utils/generatePaths.ts";
 
 export function getStaticPaths() {
-  return getStaticTypePaths(unitData);
+	return getStaticTypePaths(unitData);
 }
 const unitType = Astro.params.type;
 const data = unitData[unitType];
@@ -21,46 +21,46 @@ const title = unitType.charAt(0).toUpperCase() + unitType.slice(1);
 ---
 
 <Layout>
-  <TypeConversionCard
-    title={title}
-    unitTypeList={Object.keys(data)}
-    data-unitType={unitType}
-  />
-  <div class="links">
-    {
-      converstionPaths.map((path) => {
-        const { conversion } = path.params;
-        return (
-          <div>
-            <a href={`/${unitType}/${conversion}`}>{conversion}</a>
-          </div>
-        );
-      })
-    }
-  </div>
+	<TypeConversionCard
+		title={title}
+		unitTypeList={Object.keys(data)}
+		data-unitType={unitType}
+	/>
+	<div class="links">
+		{
+			converstionPaths.map((path) => {
+				const { conversion } = path.params;
+				return (
+					<div>
+						<a href={`/${unitType}/${conversion}`}>{conversion}</a>
+					</div>
+				);
+			})
+		}
+	</div>
 </Layout>
 
 <style>
-  .links {
-    columns: 2;
-    width: fit-content;
-    margin: auto;
-    padding-top: 2rem;
-  }
-  .links div {
-    width: fit-content;
-    padding: 5px 10px;
-  }
+	.links {
+		columns: 2;
+		width: fit-content;
+		margin: auto;
+		padding-top: 2rem;
+	}
+	.links div {
+		width: fit-content;
+		padding: 5px 10px;
+	}
 
-  @media (min-width: 480px) {
-    .links {
-      columns: 3;
-    }
-  }
+	@media (min-width: 480px) {
+		.links {
+			columns: 3;
+		}
+	}
 
-  @media (min-width: 640px) {
-    .links {
-      columns: 4;
-    }
-  }
+	@media (min-width: 640px) {
+		.links {
+			columns: 4;
+		}
+	}
 </style>
