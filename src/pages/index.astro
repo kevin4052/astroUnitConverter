@@ -1,11 +1,11 @@
 ---
-import unitData from "@data/unitData.ts";
 import Layout from "@layouts/Layout.astro";
 import GeneralConversionCard from "@components/GeneralConvertionCard.astro";
+import unitData from "@data/unitData.ts";
 
 const unitTypeList = Object.keys(unitData);
 ---
 
 <Layout>
-  <GeneralConversionCard title="Unit Converter" unitTypeList={unitTypeList} />
+	<GeneralConversionCard title="Unit Converter" unitTypeList={unitTypeList} />
 </Layout>

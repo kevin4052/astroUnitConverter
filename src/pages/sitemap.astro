@@ -1,0 +1,97 @@
+---
+import Layout from "@layouts/Layout.astro";
+import data from "@data/unitData.ts";
+import theme from "@styles/themeColors";
+import { getStaticConversionPaths } from "@utils/generatePaths";
+
+interface MappedData {
+	[key: string]: ConversionPath[];
+}
+
+const { primary, secondary, background, info } = theme;
+const unitTypeList = Object.keys(data);
+const mappedData = {} as MappedData;
+for (const type of unitTypeList) {
+	const typeData = {} as UnitConversions;
+	typeData[type] = data[type];
+	mappedData[type] = getStaticConversionPaths(typeData);
+}
+---
+
+<Layout>
+	<section>
+		<h2>Sitemap</h2>
+		<div class="site-group">
+			<div class="site-group-title">
+				<h3>Pages</h3>
+			</div>
+			<div class="site-group-info">
+				<div>
+					<a href="/">Home</a>
+				</div>
+				<div>
+					<a href="/sitemap">Sitemap</a>
+				</div>
+			</div>
+		</div>
+		{
+			unitTypeList.map((type) => {
+				return (
+					<div class="site-group">
+						<div class="site-group-title">
+							<h3>
+								{type[0].toUpperCase() + type.slice(1)}{" "}
+								Conversions
+							</h3>
+						</div>
+						<div class="site-group-info">
+							{mappedData[type].map((unitData) => {
+								const { conversion } = unitData.params;
+								const units = conversion.split("-");
+								return (
+									<div>
+										<a href={`/${type}/${conversion}`}>
+											{`${units[0]} to ${units[1]} conversion`}
+										</a>
+									</div>
+								);
+							})}
+						</div>
+					</div>
+				);
+			})
+		}
+	</section>
+</Layout>
+
+<style define:vars={{ primary, secondary, background, info }}>
+	.site-group-info {
+		background-color: var(--background);
+		padding: 0.5rem 1rem;
+		border: 1px solid black;
+		border-radius: 10px;
+		column-count: 2;
+	}
+
+	.site-group-info a {
+		color: var(--primary);
+	}
+
+	@media (min-width: 480px) {
+		.site-group-info {
+			column-count: 3;
+		}
+	}
+
+	@media (min-width: 640px) {
+		.site-group-info {
+			column-count: 4;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.site-group-info {
+			column-count: 5;
+		}
+	}
+</style>
